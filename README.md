@@ -27,6 +27,10 @@ The examples included here are the same as the ones in the presentation, in runn
 
   C#, using .NET 5. The (console) application uses [BenchmarkDotNet](https://benchmarkdotnet.org/) and runs all benchmarks in sequence, pausing for the Enter key in between. The results in the presentation were produced with Visual Studio Professional 2019.
 
+### Putpixel (Asm)
+
+Yeah, this brought me back. I don't think I actually did any of the follow-ups beyond the second example myself at the time, but they represent a natural progression if one were *really* hunting clock cycles. The comments in the routines specify the number of bytes and clock cycles each instruction requires, respectively, as per Intel's 80386 specification.
+
 ### Functional vs. imperative (JS)
 
 The main takeaway here is that function calls are usually expensive, as are repeated iterations arising from pipeline-style code. On the other hand, functional code is typically more readable and *obvious* than its imperative equivalent.
