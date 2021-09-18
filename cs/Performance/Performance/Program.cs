@@ -20,6 +20,27 @@ namespace Performance
             BenchmarkRunner.Run<LazyLinq>();
 
             Pause();
+            Console.WriteLine();
+
+            var re = new Regexes();
+            Console.WriteLine("Regexes");
+            Console.WriteLine("=======");
+            Console.WriteLine();
+            Console.WriteLine("Simple pattern invalid e-mails (library method): " + re.ValidateEmailsSimpleMethod());
+            Console.WriteLine("Simple pattern invalid e-mails (object instance): " + re.ValidateEmailsSimpleObject());
+            Console.WriteLine("Simple pattern invalid e-mails (class instance): " + re.ValidateEmailsSimpleClass());
+            Console.WriteLine("Simple pattern invalid e-mails (compiled instance): " + re.ValidateEmailsSimpleCompiled());
+            Console.WriteLine("Medium pattern invalid e-mails (library method): " + re.ValidateEmailsMediumMethod());
+            Console.WriteLine("Medium pattern invalid e-mails (object instance): " + re.ValidateEmailsMediumObject());
+            Console.WriteLine("Medium pattern invalid e-mails (class instance): " + re.ValidateEmailsMediumClass());
+            Console.WriteLine("Medium pattern invalid e-mails (compiled instance): " + re.ValidateEmailsMediumCompiled());
+            Console.WriteLine("Complex pattern invalid e-mails (library method): " + re.ValidateEmailsComplexMethod());
+            Console.WriteLine("Complex pattern invalid e-mails (object instance): " + re.ValidateEmailsComplexObject());
+            Console.WriteLine("Complex pattern invalid e-mails (class instance): " + re.ValidateEmailsComplexClass());
+            Console.WriteLine("Complex pattern invalid e-mails (compiled instance): " + re.ValidateEmailsComplexCompiled());
+            BenchmarkRunner.Run<Regexes>();
+
+            Pause();
         }
 
         private static void Pause()
