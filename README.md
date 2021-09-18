@@ -1,14 +1,22 @@
 CTS 2021: Performance – It still matters
 ========================================
 
-This repository contains the code behind the examples in the presentation "Performance – It still matters"
-prepared for the 2021 edition of [Cygni Tech Summit](https://cts.cygni.se).
+This repository contains the code behind the examples in the presentation "Performance – It still matters" prepared for the 2021 edition of [Cygni Tech Summit](https://cts.cygni.se).
 
 
 Introduction
 ------------
 
-TODO
+Back in the olden days, programmers had to know and use all sorts of optimization tricks to squeeze out acceptable performance from the relatively meager hardware available, especially when it came to demanding applications such as real-time graphical games. With the explosive development of much more powerful equipment, higher-level languages and frameworks, computing services and the like since then, much of that knowledge has fallen by the wayside, with the underlying raw power there to pick up the slack.
+
+In other words, if an application is perceived to exhibit comparable performance to a time years or even decades ago, this means that the code has gotten *worse*, simply because developers often don't *have* to think about these things as much as they used to – and that's a problem.
+
+The presentation looks at some common patterns and pitfalls, backed up by benchmark results, to try to bring some of the performance-aware mindset of old back into the high-level world of today that most of us work in. While counting clock cycles (see the Asm example) is rarely done any longer, the presented cases should provide ample angles of attack for many projects suffering from performance issues, known or otherwise.
+
+One of the most important points, I think, is one of scalability: If you only develop and test with small samples and light loads, your application runs the risk of going down in flames when it ends up being suddenly and unexpectedly `/.`-ed, simply because the small data set combined with today's hardware obscured the fact that your code was actually not nearly as good as you thought it was.
+
+Now, truly reliable benchmarking is hard, so don't be surprised if your figures differ from mine when you run the examples yourself, especially if you use different versions of the tools. However, the general relationships should hold, and the even more general points they represent definitely do – just be aware that YMMV.
+
 
 Code examples
 -------------
