@@ -67,11 +67,13 @@ The main point here is to perform costly setup as early as possible, and as seld
 
 Regex literals in JavaScript are a different beast, however, and in general it is safe to assume that these are *not* in fact re-evaluated every time they are encountered, but rather that this is something that occurs only once. The performance degradation when using the `RegExp` constructor is comparable, though, and should be avoided when the pattern is known to be constant. Benchmarking this is left as an exercise to the reader.
 
-### Data structures (JS)
+### Data structures (JS/C#)
 
 Lookups will always be faster with indexed data structures than with straight collections that require iteration, but the thing that trips many developers up is that this difference usually does not manifest itself until the data set grows large – which it typically isn't in the development and/or testing phases.
 
 The AoC slide in the presentation video unfortunately contains a couple of errors in the benchmark labels, which have since been corrected in the presentation source. The examples in the [referenced puzzle](https://adventofcode.com/2020/day/23) are in fact 10 cups with 100 moves in part 1 and 1,000,000 cups with 10,000,000 moves in part 2, but the benchmark figures presented are from *single runs* of the cup moving algorithms for 10 and 1,000,000 cups respectively, since we'd be waiting forever for the naive version to finish the full 10,000,000 runs – hence the exploding heads. Sorry for the mixup.
+
+The C# string concatenation benchmark also included here was not part of the recorded presentation, but it illustrates the pitfall of treating strings as malleable. They are, in fact, immutable, which means that every time something is added to a string, a new copy is created in memory and the old one is thrown away, putting pressure on the garbage collector. That's what `StringBuilder` is for, and as we can see the difference is very clear – especially when it comes to memory usage and garbage collection, both of which explode as the iteration count grows when using simple `+=` concatenation (by a factor of almost 60 in this case!). In fact, I had to go as low as 20 to reach parity here, and the manual list-join variant also included performs somewhat worse, so there really isn't any reason *not* to use `StringBuilder` when you need to, well, build strings.
 
 ### Language features (JS)
 

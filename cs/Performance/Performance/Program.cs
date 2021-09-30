@@ -38,7 +38,21 @@ namespace Performance
             Console.WriteLine("Complex pattern invalid e-mails (object instance): " + re.ValidateEmailsComplexObject());
             Console.WriteLine("Complex pattern invalid e-mails (class instance): " + re.ValidateEmailsComplexClass());
             Console.WriteLine("Complex pattern invalid e-mails (compiled instance): " + re.ValidateEmailsComplexCompiled());
+            Console.WriteLine();
             BenchmarkRunner.Run<Regexes>();
+
+            Pause();
+            Console.WriteLine();
+
+            var strs = new Strings();
+            Console.WriteLine("Strings");
+            Console.WriteLine("=======");
+            Console.WriteLine();
+            Console.WriteLine("String length (concatenation): " + strs.Concatenation());
+            Console.WriteLine("String length (builder): " + strs.Builder());
+            Console.WriteLine("String length (list + join): " + strs.ListJoin());
+            Console.WriteLine();
+            BenchmarkRunner.Run<Strings>();
 
             Pause();
         }
