@@ -3,6 +3,9 @@ CTS 2021: Performance – It still matters
 
 This repository contains the code behind the examples in the presentation "Performance – It still matters" prepared for the 2021 edition of [Cygni Tech Summit](https://cts.cygni.se).
 
+[Presentation source (recorded)](https://drive.google.com/file/d/1NcPvhGh8Fl9vR1WzyWkuhnFniMhuACd6/view)  
+[Presentation source (extended)](https://drive.google.com/file/d/1Cb7yIDxfgyupb0cbYanzzR9oPfDAyZ7R/view)
+
 
 Introduction
 ------------
@@ -29,7 +32,7 @@ The examples included here are the same as the ones in the presentation, in runn
 
 - *js*
 
-  JavaScript, using ES2020. The benchmarks use a custom wrapper around [Benchmark.js](https://benchmarkjs.com/) for ease of presenting the results and are located in separate files grouped in a number of subdirectories, so just point Node at them and go. The results in the presentation were produced with Node 14.7, apart from the DOM example (see below).
+  JavaScript, using ES2020. The benchmarks use a custom wrapper around [Benchmark.js](https://benchmarkjs.com/) for ease of presenting the results and are located in separate files grouped in a number of subdirectories, so just point Node at them and go (remember to run `yarn` first). The results in the presentation were produced with Node 14.7, apart from the DOM example (see below).
 
 - *cs*
 
@@ -71,7 +74,7 @@ Regex literals in JavaScript are a different beast, however, and in general it i
 
 Lookups will always be faster with indexed data structures than with straight collections that require iteration, but the thing that trips many developers up is that this difference usually does not manifest itself until the data set grows large – which it typically isn't in the development and/or testing phases.
 
-The AoC slide in the presentation video unfortunately contains a couple of errors in the benchmark labels, which have since been corrected in the presentation source. The examples in the [referenced puzzle](https://adventofcode.com/2020/day/23) are in fact 10 cups with 100 moves in part 1 and 1,000,000 cups with 10,000,000 moves in part 2, but the benchmark figures presented are from *single runs* of the cup moving algorithms for 10 and 1,000,000 cups respectively, since we'd be waiting forever for the naive version to finish the full 10,000,000 runs – hence the exploding heads. Sorry for the mixup.
+The AoC slide in the presentation video unfortunately contains a couple of errors in the benchmark labels, which have since been corrected in the presentation sources linked above. The examples in the [referenced puzzle](https://adventofcode.com/2020/day/23) are in fact 10 cups with 100 moves in part 1 and 1,000,000 cups with 10,000,000 moves in part 2, but the benchmark figures presented are from *single runs* of the cup moving algorithms for 10 and 1,000,000 cups respectively, since we'd be waiting forever for the naive version to finish the full 10,000,000 runs – hence the exploding heads. Sorry for the mixup.
 
 The C# string concatenation benchmark also included here was not part of the recorded presentation, but it illustrates the pitfall of treating strings as malleable. They are, in fact, immutable, which means that every time something is added to a string, a new copy is created in memory and the old one is thrown away, putting pressure on the garbage collector. That's what `StringBuilder` is for, and as we can see the difference is very clear – especially when it comes to memory usage and garbage collection, both of which explode as the iteration count grows when using simple `+=` concatenation (by a factor of almost 60 in this case!). In fact, I had to go as low as 20 to reach parity here, and the manual list-join variant also included performs somewhat worse, so there really isn't any reason *not* to use `StringBuilder` when you need to, well, build strings.
 
@@ -87,7 +90,7 @@ The following benchmarks are also included here, which were not part of the reco
 
 - __Object instantiation__
 
-  Here we compare different ways of creating an object, where the class declaration, the constructor function and the prototype-based factory functions are all basically on par with each other, although the version of the latter with an `init()` method is slightly slower due to the added function call – all of which is expected.
+  Here we compare different ways of creating an object, where the class declaration, the constructor function and the prototype-based factory function are all basically on par with each other, although the version of the latter with an `init()` method is slightly slower due to the added function call – all of which is expected.
 
   What's also expected is that the closure-based factory function, the `bind()`-in-constructor version (if you've done pre-hooks React development you've likely seen – and cursed – this pattern many a time) and the arrow-function-in-constructor version are likewise comparable, since they all result in the recreation of the method every time an object is instantiated.
 
@@ -95,4 +98,4 @@ The following benchmarks are also included here, which were not part of the reco
 
   Now, before you go throwing out all your code it should be noted, and noted well, that all the differences above apply to a *single* object instantiation. In other words – again with the data set sizes – this is only going to be a real issue if you find yourself having to create, say, tens of thousands of objects per second – and if that's the case, the main problem with your code is likely related to the fact that you're *creating tens of thousands of objects per second* in the first place, so you should probably start there. Remember: large bottlenecks first, small ones later – and it's a safe bet that object creation mechanisms will be found among the latter.
 
-  Finally, remember that there [aren't actually any classes in JavaScript](https://cygni.se/there-are-no-classes-in-javascript).
+  Finally, remember that [there aren't actually any classes in JavaScript](https://cygni.se/there-are-no-classes-in-javascript)...
